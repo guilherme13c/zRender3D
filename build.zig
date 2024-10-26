@@ -13,12 +13,18 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
-    exe.linkLibCpp();
+    const raylib_dep = b.dependency("raylib-zig", .{
+        .target = target,
+        .optimize = optimize,
+    });
 
-    exe.linkSystemLibrary("glew");
-    exe.linkSystemLibrary("glfw3");
-    exe.linkSystemLibrary("GL");
-    exe.linkSystemLibrary("glm");
+    const raylib = raylib_dep.module("raylib");
+    const raygui = raylib_dep.module("raygui");
+    const raylib_artifact = raylib_dep.artifact("raylib");
+
+    exe.linkLibrary(raylib_artifact);
+    exe.root_module.addImport("raylib", raylib);
+    exe.root_module.addImport("raygui", raygui);
 
     b.installArtifact(exe);
 
