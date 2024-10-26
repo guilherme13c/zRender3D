@@ -15,7 +15,7 @@ pub fn main() anyerror!void {
         .projection = rl.CameraProjection.camera_perspective,
     };
 
-    const cubePosition = rl.Vector3{ .x = 0, .y = 0, .z = 0 };
+    const propPosition = rl.Vector3{ .x = 0, .y = 0, .z = 0 };
 
     rl.disableCursor();
     rl.setTargetFPS(60);
@@ -34,8 +34,8 @@ pub fn main() anyerror!void {
             rl.beginMode3D(camera);
             defer rl.endMode3D();
 
-            rl.drawCube(cubePosition, 2, 2, 2, rl.Color.ray_white);
-            rl.drawCubeWires(cubePosition, 2, 2, 2, rl.Color.magenta);
+            rl.drawCube(propPosition, 2, 2, 2, rl.Color.ray_white);
+            rl.drawCubeWires(propPosition, 2, 2, 2, rl.Color.magenta);
         }
     }
 }

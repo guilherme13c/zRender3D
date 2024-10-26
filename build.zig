@@ -1,4 +1,5 @@
 const std = @import("std");
+const rlz = @import("raylib-zig");
 
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
@@ -16,6 +17,8 @@ pub fn build(b: *std.Build) void {
     const raylib_dep = b.dependency("raylib-zig", .{
         .target = target,
         .optimize = optimize,
+        .shared = true,
+        .opengl_version = rlz.OpenglVersion.gl_4_3,
     });
 
     const raylib = raylib_dep.module("raylib");
